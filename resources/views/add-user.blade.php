@@ -1,5 +1,5 @@
 @extends('layouts.master')
 
 @section('content')
-    <users-listing></users-listing>
+    <add-user></add-user>
 @endsection

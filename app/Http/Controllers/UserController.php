@@ -41,4 +41,8 @@ class UserController extends Controller
         $user=User::create($request->all());
         return ['status'=>'success','message'=>'User added successfully1','user'=>$user];
     }
+
+    public function addUserView(){
+        return view('add-user');
+    }
 }

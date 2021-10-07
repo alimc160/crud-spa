@@ -11,7 +11,7 @@ const getters = {
 
 const actions = {
     async fetchUsers({commit}){
-        const response = await axios.get("http://127.0.0.1:8000/users").then(res=>{
+        const response = await axios.get("http://localhost:8000/api/users").then(res=>{
             console.log(res);
         }).catch(error=>{
             console.log(error);
@@ -19,11 +19,11 @@ const actions = {
         commit("setUsers", response.data.data)
     },
     async addUsers({commit}, user){
-        const response = await axios.post("http://127.0.0.1:8000/users", user);
+        const response = await axios.post("http://localhost:8000/api/users", user);
         commit("addNewUser", response.data.data.user)
     },
     async deleteUser({commit}, id){
-        await axios.delete(`http://127.0.0.1:2021/users/${id}`);
+        await axios.delete(`http://localhost:8000/api/users/${id}`);
         commit("removeUser", id)
     }
 };

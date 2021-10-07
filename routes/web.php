@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/all-users',[\App\Http\Controllers\UserController::class,'getAllUsers']);
-Route::get('/users',[\App\Http\Controllers\UserController::class,'getUsersList'])->name('users.list');
-Route::get('/users/{id}',[\App\Http\Controllers\UserController::class,'deleteUser'])->name('users.delete');
-Route::post('/users',[\App\Http\Controllers\UserController::class,'addUser'])->name('users.add');
+Route::get('/add-user',[\App\Http\Controllers\UserController::class,'addUserView']);
+Route::get('/api/users',[\App\Http\Controllers\UserController::class,'getUsersList'])->name('users.list');
+Route::get('/api/users/{id}',[\App\Http\Controllers\UserController::class,'deleteUser'])->name('users.delete');
+Route::post('/api/users',[\App\Http\Controllers\UserController::class,'addUser'])->name('users.add');
