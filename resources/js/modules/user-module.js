@@ -1,26 +1,35 @@
 import axios from 'axios';
-import {error} from "vue-resource/src/util";
+import Vuex from 'vuex';
+import Vue from "vue";
+
+Vue.use(Vuex);
+
 
 const state = {
     users : [],
 }
 
 const getters = {
-    usersList : state=> state.users
+    usersList : []
 }
 
-const actions = {
+let actions = {
     async fetchUsers({commit}){
         const response = await axios.get("http://localhost:8000/api/users").then(res=>{
             console.log(res);
         }).catch(error=>{
             console.log(error);
         });
-        commit("setUsers", response.data.data)
+        commit("SET_Users", response)
     },
     async addUsers({commit}, user){
-        const response = await axios.post("http://localhost:8000/api/users", user);
-        commit("addNewUser", response.data.data.user)
+        const response = await axios.post("http://localhost:8000/api/users", user).then(res=>{
+            console.log(res.data);
+        }).catch(error=>{
+            console.log(error);
+        });
+        console.log(response);
+        commit("addNewUser", response.user)
     },
     async deleteUser({commit}, id){
         await axios.delete(`http://localhost:8000/api/users/${id}`);
@@ -39,9 +48,9 @@ const mutations = {
     )
 };
 
-export default {
+export default new Vuex.Store({
     state,
     getters,
     actions,
     mutations
-}
+});

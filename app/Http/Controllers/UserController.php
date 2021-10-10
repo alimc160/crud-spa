@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use phpDocumentor\Reflection\DocBlock\Tags\Uses;
 
 class UserController extends Controller
@@ -15,11 +16,12 @@ class UserController extends Controller
     public function getAllUsers(){
         return view('users');
     }
+
     /**
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return mixed
      */
     public function getUsersList(){
-        return UserResource::collection(User::all());
+        return User::paginate(10);
     }
 
     /**
@@ -37,6 +39,10 @@ class UserController extends Controller
            'name'=>'required',
            'email'=>'required|unique:users,email',
            'password'=>'required',
+        ]);
+        $hashPassword = Hash::make($request->password);
+        $request->merge([
+            'password'=>$hashPassword
         ]);
         $user=User::create($request->all());
         return ['status'=>'success','message'=>'User added successfully1','user'=>$user];

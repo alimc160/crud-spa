@@ -6,6 +6,9 @@
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Enter email" v-model="email">
         </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Enter Password" v-model="password">
+        </div>
         <button type="submit" class="btn btn-block btn-primary">Add</button>
     </form>
 </template>
@@ -18,7 +21,8 @@ export default {
     data(){
         return {
             name: '',
-            email: ''
+            email: '',
+            password:''
         }
     },
     methods:{
@@ -26,7 +30,8 @@ export default {
         onUserSubmit() {
             this.addUsers({
                 name: this.name,
-                email: this.email
+                email: this.email,
+                password: this.password
             })
         }
     }
